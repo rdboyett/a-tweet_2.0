@@ -1,0 +1,512 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block body %}
+
+      <div class="row">
+        <div class="col-sm-4 col-lg-3">  <!-- Left Column --------------------------------->
+              <div class="panel panel-default"> <!------------ User Profile info ---------->
+                <div class="user-panel-heading hidden-xs"></div>
+                <div class="panel-body">
+                  <div class="userInfo-holder hidden-xs">
+                    <div class="avatar-holder">
+                      <img src="{% static "twitter_project/image/default.png" %}" alt="Robert Boyett">
+                    </div>
+                    <div class="name-holder">
+                      <h4>{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h4>
+                      <div>{{ user.username }}</div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="tweet-label text-center">TWEETS</div>
+                    <div class="tweet-number text-center">{{ tweetCount }}</div>
+                  </div><div class="col-xs-4">
+                    <div class="tweet-label text-center">FOLLOWING</div>
+                    <div class="tweet-number text-center">301</div>
+                  </div><div class="col-xs-4">
+                    <div class="tweet-label text-center">FOLLOWERS</div>
+                    <div class="tweet-number text-center">154</div>
+                  </div>
+                </div>
+              </div> <!---------------------------- End of User Profile info -------------->
+              
+              
+              
+              
+              <!------- Classes Panel ------------------->
+<div class=" accordion" id="accordion1">
+  <div class="accordion-group panel panel-default">
+    <div class="accordion-heading panel-heading">
+      <a class="accordion-toggle panel-title" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+        My Classes
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in panel-body">
+                  <div class="bs-component">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item active">
+                        1st Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        2nd Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        3rd Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                    </div>
+                  </div>
+    </div>
+                <div class="panel-footer">
+                    <div style="display: inline-block; height: 20px;width: 100%">
+                      <a  data-toggle="modal" data-target="#createClassPopup" style="cursor: pointer;float: left;">create a class</a>
+                      <a  data-toggle="modal" data-target="#joinClassPopup" style="cursor: pointer;float: right;">join a class</a>
+                    </div>
+                </div>
+  </div>
+</div>
+              <!------------------------ End of Classes Panel ------------------------------------->
+              
+              
+              
+              
+              
+              <!------- Trends Panel ------------->
+<div class=" accordion" id="accordion2">
+  <div class="accordion-group panel panel-default">
+    <div class="accordion-heading panel-heading">
+      <a class="accordion-toggle panel-title" data-toggle="collapse" data-parent="#accordion2" href="#trendlist">
+        High School Trends
+      </a>
+    </div>
+    <div id="trendlist" class="accordion-body collapse in panel-body">
+      <div class="accordion-inner">
+                  <ul class="trend-list">
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                    <li><a href="#">#whatever</a></li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+              <!----------------------- End of Trends Panel ------------------------------->
+              
+              
+              
+              
+              
+              
+              
+              
+              <!-- Floating Right Column --------------------------------->
+              
+<div class="accordion hidden-lg" id="accordion3">
+  <div class="accordion-group panel panel-default">
+    <div class="accordion-heading panel-heading">
+      <a class="accordion-toggle panel-title" data-toggle="collapse" data-parent="#accordion3" href="#followlist1">
+        Who to Follow
+      </a>
+    </div>
+    <div id="followlist1" class="accordion-body collapse in panel-body">
+      
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+    </div>
+  </div>
+</div>
+              
+              <!-- End of Floating Right Column -------------------------->
+              
+              
+              
+        </div>    <!-- End of Left Column ------------------------------------------------->
+        
+        <div class="col-sm-8 col-lg-6 tweets-panel">  <!-- Tweets Column --------------------------------->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2 text-center">
+                      <span class="tweets-title" style="font-size: 22px;">1st Period</span>
+                    </div>
+                    <div class="col-xs-2">
+                      <span style="float: right;line-height: 16px;vertical-align: middle;font-size: 10px;">class code:</span>
+                      <a style="float: right;line-height: 16px;vertical-align: middle;">2T64G</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-body tweet-panel">
+                  
+                  <ul>
+                    <li class="row" style="background-color: #f5f8fa;">
+                      <div class="col-xs-12 text-center">
+                        <button class="btn btn-twitter-no-bg" data-toggle="tooltip" data-placement="top" title="Delete">
+                                <span style="font-size: 13px;">View 10 new Tweets</span>
+                        </button>
+                      </div>
+                    </li>
+                    <li class="row">
+                      <div class="col-xs-1" style="padding: 0;">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-11">
+                        <div class="col-xs-12 tweet-holder" style="min-height: 48px;">
+                          <span class="name" style="">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                          <span class="username">{{ user.username }}</span>
+                          <span class="time">2h</span>
+                          <p id="tweet-deck4" class="tweet-text">Here is a #tag tweet @you www.google.com that I am trying to write that is approximately or actually exactly one hundred and forty characters long.  I hope this</p>
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips" data-toggle="tooltip" data-placement="top" title="Reply">
+                              <span class="fa fa-reply"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips success-hover" data-toggle="tooltip" data-placement="top" title="Retweet">
+                              <span class="fa fa-retweet"><span style="font-size: 14px;font-weight: bold;"> 10</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips warning-hover" data-toggle="tooltip" data-placement="top" title="Favorite">
+                              <span class="fa fa-star"><span style="font-size: 14px;font-weight: bold;"> 5</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips danger-hover" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span class="fa fa-trash"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-4 pull-right">
+                            <button class="btn btn-twitter-no-bg pull-right" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span>view conversation</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    <li class="row">
+                      <div class="col-xs-1" style="padding: 0;">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-11">
+                        <div class="col-xs-12 tweet-holder" style="min-height: 48px;">
+                          <span class="name" style="">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                          <span class="username">{{ user.username }}</span>
+                          <span class="time">2h</span>
+                          <p id="tweet-deck1" class="tweet-text">Here is a #tag tweet that I am trying to write that is approximately or actually exactly one hundred and forty characters long.  I hope this</p>
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips" data-toggle="tooltip" data-placement="top" title="Reply">
+                              <span class="fa fa-reply"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips success-hover" data-toggle="tooltip" data-placement="top" title="Retweet">
+                              <span class="fa fa-retweet"><span style="font-size: 14px;font-weight: bold;"> 10</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips warning-hover" data-toggle="tooltip" data-placement="top" title="Favorite">
+                              <span class="fa fa-star"><span style="font-size: 14px;font-weight: bold;"> 5</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips danger-hover" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span class="fa fa-trash"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-4 pull-right">
+                            <button class="btn btn-twitter-no-bg pull-right" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span>view conversation</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    <li class="row">
+                      <div class="col-xs-offset-1 col-xs-11">
+                        <span class="fa-stack">
+                          <i class="fa fa-square fa-stack-1x text-success" style="font-size: 18px;"></i>
+                          <i class="fa fa-retweet fa-stack-1x fa-inverse" style="font-size: 12px;"></i>
+                        </span>
+                        <span class="text-muted" style="font-size: 13px;"><a href="#">Joe Blow</a> retweeted</span>
+                      </div>
+                      <div class="col-xs-1" style="padding: 0;">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-11">
+                        <div class="col-xs-12 tweet-holder" style="min-height: 48px;">
+                          <span class="name" style="">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                          <span class="username">{{ user.username }}</span>
+                          <span class="time">2h</span>
+                          <p id="tweet-deck2" class="tweet-text">Here is a #tag tweet that I am trying to write that is approximately or actually exactly one hundred and forty characters long.  I hope this</p>
+                        </div>
+                        <div class="col-xs-12 tweet-img text-center">
+                          <img src="https://pbs.twimg.com/media/B5LxnNGCQAA2PUU.jpg" class="img-responsive" alt="whatever">
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips" data-toggle="tooltip" data-placement="top" title="Reply">
+                              <span class="fa fa-reply"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips success-hover" data-toggle="tooltip" data-placement="top" title="Retweet">
+                              <span class="fa fa-retweet"><span style="font-size: 14px;font-weight: bold;"> 10</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips warning-hover" data-toggle="tooltip" data-placement="top" title="Favorite">
+                              <span class="fa fa-star"><span style="font-size: 14px;font-weight: bold;"> 5</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips danger-hover" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span class="fa fa-trash"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-4 pull-right">
+                            <button class="btn btn-twitter-no-bg pull-right" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span>view conversation</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    <li class="row">
+                      <div class="col-xs-1" style="padding: 0;">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-11">
+                        <div class="col-xs-12 tweet-holder" style="min-height: 48px;">
+                          <span class="name" style="">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                          <span class="username">{{ user.username }}</span>
+                          <span class="time">2h</span>
+                          <p id="tweet-deck3" class="tweet-text">Here is a #tag tweet that I am trying to write that is approximately or actually exactly one hundred and forty characters long.  I hope this</p>
+                        </div>
+                        <div class="col-xs-12">
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips" data-toggle="tooltip" data-placement="top" title="Reply">
+                              <span class="fa fa-reply"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips success-hover" data-toggle="tooltip" data-placement="top" title="Retweet">
+                              <span class="fa fa-retweet"><span style="font-size: 14px;font-weight: bold;"> 10</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips warning-hover" data-toggle="tooltip" data-placement="top" title="Favorite">
+                              <span class="fa fa-star"><span style="font-size: 14px;font-weight: bold;"> 5</span></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-2 text-center">
+                            <button class="btn btn-twitter-NoBG tooltips danger-hover" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span class="fa fa-trash"></span>
+                            </button>
+                          </div>
+                          <div class="col-xs-4 pull-right">
+                            <button class="btn btn-twitter-no-bg pull-right" data-toggle="tooltip" data-placement="top" title="Delete">
+                              <span>view conversation</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                  </ul>
+                  
+                  
+                </div>
+              </div>
+        </div>    <!-- End of Tweets Column ------------------------------------------------->
+        
+        
+        
+        <div class="col-lg-3 visible-lg">  <!-- Floating Right Column --------------------------------->
+            <div class="accordion" id="accordion4">
+              <div class="accordion-group panel panel-default">
+                <div class="accordion-heading panel-heading">
+                  <a class="accordion-toggle panel-title" data-toggle="collapse" data-parent="#accordion4" href="#followlist2">
+                    Who to Follow
+                  </a>
+                </div>
+                <div id="followlist2" class="accordion-body collapse in panel-body">
+      
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="alert alert-dismissable" style="padding: 0 15px 0 0;margin-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <img class="avatar" src="https://pbs.twimg.com/profile_images/523120150669586432/AS14NZtS_bigger.jpeg" alt="Robert Boyett">
+                      </div>
+                      <div class="col-xs-8 following-bar">
+                        <div class="col-xs-12" style="overflow: hidden;">
+                          <span class="name" style="">Joe Blow</span>
+                          <span class="username">@joblow</span>
+                        </div>
+                        <button class="btn btn-follow"><span class="fa fa-plus" style="font-size: 8px;margin: -5px 0 0 0;"></span>
+                          <span class="fa fa-user" style="font-size: 14px;margin: 0 5px 0 -3px;"></span>Follow</button>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="button" class="close pull-right" data-dismiss="alert"><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+        </div>    <!-- End of Floating Column ------------------------------------------------->
+<div class="row">
+  <div class="col-sm-4 col-lg-3">
+    
+
+  </div>
+</div>
+
+<!---
+              <div class="panel panel-default"> ---- Classes Panel ------------------
+                <div class="panel-heading">
+                  <span class="panel-title">My Classes</span>
+                </div>
+                <div class="panel-body">
+                  <div class="bs-component">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item active">
+                        1st Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        2nd Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        3rd Period
+                        <button class="btn btn-default btn-xs pull-right"><i class="fa fa-cog"></i></button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer">
+                    <div style="display: inline-block; height: 20px;width: 100%">
+                      <a href="#" style="float: left;">create a class</a>
+                      <a href="#" style="float: right;">join a class</a>
+                    </div>
+                </div>
+              </div> <!------------------------ End of Classes Panel ------------------------------------->
+        
+        
+        
+        
+{% endblock %}
+
+      

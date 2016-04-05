@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block body %}
+
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">  <!-- Left Column --------------------------------->
+              <div class="panel panel-default"> <!------------ User Profile info ---------->
+                <div class="panel-body">
+                  <form role="form" action="{% url "google_login.views.setupStudentGradYears" %}" method="post">{% csrf_token %}
+                    <div class="form-group">
+                      <label for="numberStudents">How many students?</label>
+                      <select id="numberStudents" name="numberStudents" class="form-control" selectRequired="true">
+                        <option value="">select</option>
+                        <option value="all">All</option>
+                        <option value="one">One</option>
+                      </select>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="studentEmail">Student email address</label>
+                      <input type="email" class="form-control" name="studentEmail" placeholder="Enter email" checkSelect="true">
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+              </div> <!---------------------------- End of User Profile info -------------->
+              
+              
+              
+              
+        
+{% endblock %}
+
+      
+{% block extraScript %}
+  <script src="{% static "twitter_project/js/update_students.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,391 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}No Title{% endblock %}</title>
+    
+    {% block extraTopHead %}{% endblock %}
+    
+    <!-- Bootstrap -->
+    <link href="{% static "twitter_project/css/styles.css" %}" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    
+    <link href="{% static "twitter_project/css/my_styles.css" %}" rel="stylesheet">
+      
+      
+    
+    {% block extraBottomHead %}{% endblock %}
+    
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        <div class="visible-xs">
+            <span class="{% if dashboard %}active{% endif %}">
+              <a href="{% url "twitter_project.views.dashboard" %}" class="btn btn-smallNav {% if dashboard %}active{% endif %}"><i class="fa fa-home"></i></a>
+            </span>
+            <span class="{% if classes %}active{% endif %}">
+              <a href="#" class="btn btn-smallNav"><i class="fa fa-graduation-cap {% if classes %}active{% endif %}"></i></a>
+            </span>
+            <span class="{% if profile %}active{% endif %}">
+              <a href="{% url "twitter_project.views.profile" %}" class="btn btn-smallNav {% if profile %}active{% endif %}"><i class="fa fa-user"></i></a>
+            </span>
+        </div>
+    <div class="mobileTweet visible-xs">
+      <button class="btn btn-search" data-toggle="modal" data-target="#search-popup" style="margin: 8px 8px 0 0;padding-right: 8px;"><span class="fa fa-search"></span></button>
+      <button class="launchTweet btn btn-primary tweet-btn">
+        <span class="tweet-icon"></span>
+      </button>
+    </div>
+    
+        </div>
+        
+        <div class="navbar-center"></div>
+          
+        <div class="hidden-xs" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li class="{% if dashboard %}active{% endif %}">
+              <a href="{% url "twitter_project.views.dashboard" %}"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;Home</a>
+            </li>
+            <li class="{% if classes %}active{% endif %}">
+              <a href="#"><i class="fa fa-graduation-cap fa-lg"></i>&nbsp;&nbsp;Classes</a>
+            </li>
+            <li class="{% if profile %}active{% endif %}">
+              <a href="{% url "twitter_project.views.profile" %}"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;My</a>
+            </li>
+          </ul>
+          
+          
+          
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="visible-sm">
+              <button class="btn btn-search" data-toggle="modal" data-target="#search-popup" style="margin-top: 7px;padding-right: 8px;"><span class="fa fa-search"></span></button>
+            </li>
+            <li class="hidden-sm">
+              <form id="search-navbar" class="search-form">
+                <input type="text" name="search-bar" placeholder="Search Twitter" required minlength="5" maxlength="5" nospace="true">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{% if userImages.avatar %}{{userImages.avatar}}{%else%}{% static "twitter_project/image/default.png" %}{%endif%}" alt="Robert Boyett">
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url "twitter_project.views.profile" %}">Profile</a></li>
+              </ul>
+            </li>
+            
+            <li>
+              <button class="launchTweet btn btn-primary tweet-btn">
+                  <span class="tweet-icon"></span>
+                  <span >Tweet</span>
+              </button>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<!----------------------------------------------------------------------------------------->
+<!------------------- CONTAINER ----------------------------------------------------------->
+<!----------------------------------------------------------------------------------------->
+    <div class="container" style="margin-top: 55px;">
+      
+      
+      {% block body %}{% endblock %}
+      
+    </div> <!-- end of container -->
+<!----------------------------------------------------------------------------------------->
+<!------------------- END OF CONTAINER ---------------------------------------------------->
+<!----------------------------------------------------------------------------------------->
+
+
+
+      <!-- **********************************************************************************************************************************************************
+      BASE MODAL POPUPS
+      *********************************************************************************************************************************************************** -->
+
+      {% block modal %}{% endblock %}
+
+<!-- *****************    Tweet   ******************************************************* -->
+<div id="tweet-popup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title">Compose New Tweet</h4>
+      </div>
+      <div class="modal-body modal-tweet centered">
+            <!--
+    {% if currentClass %}
+        <form>
+          <textarea name=""  maxlength="140" contenteditable="true" spellcheck="true"></textarea>
+        </form>
+    {% else %}
+    <form>
+        <textarea readonly>Please join a class to start tweeting.</textarea>
+    </form>
+    {% endif %}
+            -->
+        <div id="tweetRichBox" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" dir="ltr" aria-expanded="false">
+        </div>
+        <form>
+          <textarea id="tweetText" name=""  maxlength="270" contenteditable="true" spellcheck="true" required style="display:none;"></textarea>
+        </form>
+            
+            
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left">
+          <button class="btn btn-twitter-no-bg" style="margin-top: 10px;"><span class="fa fa-camera" style="font-size: 20px;"></span>&nbsp;&nbsp;Add photo</button>
+        </div>
+        <div class="pull-right">
+              <span id="number-counter" class="text-primary" style="font-size: 14px;line-height: 40px;vertical-align: bottom;margin-right: 10px">140</span>
+              <button id="tweetSubmit" class="btn btn-primary tweet-btn disabled" style="">
+                  <span class="tweet-icon"></span>
+                  <span >Tweet</span>
+              </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- *****************    Search   ******************************************************* -->
+<div id="search-popup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title">Search</h4>
+      </div>
+      <div class="modal-body modal-tweet centered">
+              <form id="search-popup-form">
+                <div class="form-group">
+                  <input type="text" class="form-control"  name="search-bar" placeholder="Search Twitter" required minlength="3" maxlength="45">
+                </div>
+              </form>
+              
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button type="submit" form="search-popup-form" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-------------------------------------- Create Group Popup ---------------------------------->
+<div id="createClassPopup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title">Create a Class</h4>
+      </div>
+      <div class="modal-body modal-tweet centered">
+              <form id="create-class-form" action="{% url "classrooms.ajax.createGroup" %}" enctype='multipart/form-data' method="post" autocomplete="off">{% csrf_token %}
+                <div class="form-group">
+                  <input type="text" class="form-control"  name="group_name" placeholder="Class Name" required minlength="5" maxlength="45">
+                </div>
+              </form>
+              
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button type="submit" form="className-form" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-------------------------------------- Join Group Popup ---------------------------------->
+<div id="joinClassPopup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title">Join a Class</h4>
+      </div>
+      <div class="modal-body modal-tweet centered">
+              <form id="join-class-form">
+                <div class="form-group">
+                  <input type="text" class="form-control"  name="joinCode" placeholder="Code" required minlength="5" maxlength="5" nospace="true">
+                </div>
+              </form>
+              
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button type="submit" form="joinCode-form" class="btn btn-primary">Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-------------------------------------- Class Code Popup ---------------------------------->
+<div id="classCodePopup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title">Class Code</h4>
+      </div>
+      <div class="modal-body modal-tweet">
+        <form id="resetCode-form" action="{% url "classrooms.ajax.changeGroupCode" %}" enctype='multipart/form-data' method="post" autocomplete="off">{% csrf_token %}
+          <input name="groupID" type="hidden" value="" required>
+          <div id="classCodeBody" class="text-danger text-center" style="font-size: 100px;"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button type="submit" form="resetCode-form" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-------------------------------------- Class Code Popup ---------------------------------->
+<div id="checkYesNoPopup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><span class="fa fa-close"style="color: #000;font-size: 14px;"></span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body modal-tweet text-danger text-center" style="font-size: 20px;">
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button id="noButton" class="btn btn-default" data-dismiss="modal">No</button>
+          <button id="yesButton" class="btn btn-danger">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% if userInfo.teacher %}
+  {% if not userInfo.school %}
+<!-------------------------------------- Get Teacher Campus Popup ---------------------------------->
+<div id="getTeacherCampusPopup" class="modal fade" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded">
+      <div class="modal-header top-rounded">
+        <h4 class="modal-title">Pick Your Campus</h4>
+      </div>
+      <div class="modal-body modal-tweet">
+        <form id="getCampus-form" action="{% url "classrooms.ajax.addTeacherSchool" %}" enctype='multipart/form-data' method="post" autocomplete="off">{% csrf_token %}
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <div class="btn-group" data-toggle="buttons" style="margin-bottom: 10px;">
+                <label class="btn btn-primary">
+                  <input type="radio" name="school" value="AJH" autocomplete="off"> Junior High
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="school" value="AHS" autocomplete="off"> High School
+                </label>
+                <label class="btn btn-primary active">
+                  <input type="radio" name="school" value="neither" autocomplete="off"> Neither
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <button type="submit" form="getCampus-form" class="btn btn-warning">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endif %}
+{% endif %}
+
+
+      <!-- **********************************************************************************************************************************************************
+      END OF MODAL POPUPS
+      *********************************************************************************************************************************************************** -->
+
+
+
+    <script src="{% static "twitter_project/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "twitter_project/js/jquery.form.js" %}"></script>
+    
+    
+    <script src="{% static "twitter_project/js/main.js" %}"></script>
+    
+    <script>
+      var classLockURL = "{% url "classrooms.ajax.toggleLockGroup" %}";
+      var classDeleteURL = "{% url "classrooms.ajax.deleteGroup" %}";
+  $(document).ready(function(){
+  {% if userImages.backgroundImageLarge %}
+    $(".profile-banner").css({
+      "background":"url(../../..{{userImages.backgroundImageLarge}}) no-repeat"
+    });
+  {% endif %}
+  {% if userImages.backgroundImageSmall %}
+    $(".user-panel-heading").css({
+      "background":"url(../../..{{userImages.backgroundImageSmall}}) no-repeat",
+      "backgroundSize":'120%',
+    });
+  {% endif %}
+  });
+    </script>
+    
+    
+{% if userInfo.teacher %}
+  {% if not userInfo.school %}
+<script>
+  $("#getTeacherCampusPopup").modal({
+        "backdrop" : "static",
+        "keyboard" : "false",
+    }).modal('show');
+</script>
+  {% endif %}
+{% endif %}
+
+
+
+    
+    {% block extraScript %}{% endblock %}
+    
+    
+  </body>
+</html>
