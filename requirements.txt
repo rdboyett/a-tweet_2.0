@@ -1,0 +1,11 @@
+Django==1.7.1
+Pillow==2.7.0
+cffi==0.8.6
+cryptography==0.6.1
+google-api-python-client==1.2
+httplib2==0.9
+pyOpenSSL==0.14
+pycparser==2.10
+pycrypto==2.6.1
+six==1.8.0
+wsgiref==0.1.2
